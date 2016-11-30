@@ -4,49 +4,27 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
-};
 
 const tableData = [
   {
-    name: 'John Smith',
-    status: 'Employed',
+    task: 'Walter ayala ',
+    instructions: 'Check gas tank and open valve.Lockcode:1620.',
   },
   {
-    name: 'Randal White',
-    status: 'Unemployed',
+    task: 'Check oil and turn on fryer',
+    instructions: 'Check if more oil is needed and turn on fryer',
   },
   {
-    name: 'Stephanie Sanders',
-    status: 'Employed',
+    task: 'Check to do list',
+    instructions: 'Define to do tasks for the day',
   },
   {
-    name: 'Steve Brown',
-    status: 'Employed',
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Employed',
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Employed',
-  },
-  {
-    name: 'Adam Moore',
-    status: 'Employed',
-  },
+    task: 'Start heating drinks',
+    instructions: 'Mexican hot chocolate and cinnamon tea',
+  }
 ];
 
-export default class Checklist extends React.Component {
+export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,13 +59,13 @@ export default class Checklist extends React.Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                {<h2>Opening Checklist</h2>}
+                {<h2>Closing Checklist</h2>}
               </TableHeaderColumn>
             </TableRow>
             <TableRow>
               <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h3>Task</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Instructions"><h3>Instructions</h3></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -98,9 +76,9 @@ export default class Checklist extends React.Component {
           >
             {tableData.map( (row, index) => (
               <TableRow key={index} selected={row.selected}>
-                <TableRowColumn>{index}</TableRowColumn>
-                <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.status}</TableRowColumn>
+                <TableRowColumn>{index+1}</TableRowColumn>
+                <TableRowColumn>{row.task}</TableRowColumn>
+                <TableRowColumn>{row.instructions}</TableRowColumn>
               </TableRow>
               ))}
           </TableBody>
