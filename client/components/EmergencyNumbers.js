@@ -52,7 +52,7 @@ export default class EmergencyNumbers extends React.Component {
           primaryText={<h3>Walter</h3>}
           secondaryText={
              <ul>
-              <li>Phone: <a href="tel:123-345-9809">123-345-6788</a></li>
+              <li>Phone: <a href="tel:915-667-0831">Call Wally</a></li>
               <li>email: wasass@fokki.com</li>
             </ul>
           }

@@ -62,11 +62,7 @@ export default class ClosingChecklist extends React.Component {
                 {<h2>Closing Checklist</h2>}
               </TableHeaderColumn>
             </TableRow>
-            <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip="Task"><h3>Task</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Instructions</h3></TableHeaderColumn>
-            </TableRow>
+            
           </TableHeader>
           <TableBody
             displayRowCheckbox={this.state.showCheckboxes}
@@ -74,13 +70,17 @@ export default class ClosingChecklist extends React.Component {
             showRowHover={this.state.showRowHover}
             stripedRows={this.state.stripedRows}
           >
+          <TableRow>
+              <TableHeaderColumn tooltip="Task"><h3>Task</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Instructions"><h3>Instructions</h3></TableHeaderColumn>
+            </TableRow>
             {tableData.map( (row, index) => (
               <TableRow key={index} selected={row.selected}>
-                <TableRowColumn>{index+1}</TableRowColumn>
                 <TableRowColumn>{row.task}</TableRowColumn>
                 <TableRowColumn>{row.instructions}</TableRowColumn>
               </TableRow>
               ))}
+
           </TableBody>
           <TableFooter
             adjustForCheckbox={this.state.showCheckboxes}
