@@ -1,5 +1,4 @@
 import React from 'react';
-import Schedule from './Schedule';
 import Navigation from './Navigation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

@@ -81,9 +81,9 @@ const tableData = [
     notes: '',
     leo:'8 - 11PM',
     wally: 'OFF',
-    david: '8 - 11PM',
-    chris: '12 - 4PM',
-    corey: '5:30 - 10:30PM',
+    david: '8-11PM',
+    chris: '12-4PM',
+    corey: '5:30-10:30PM',
     annie: '',
     caroline: '',
     ian: '',
@@ -94,9 +94,9 @@ const tableData = [
     tolSchedule: 'Wed,12/14',
     notes: '',
     leo:'8 - 11PM',
-    wally: '8 - 11PM',
-    david: '8 - 11PM',
-    chris: '12 - 4PM',
+    wally: '8-11PM',
+    david: '8-11PM',
+    chris: '12-4PM',
     corey: 'OFF',
     annie: '5:30-10:30',
     caroline: '',
@@ -108,8 +108,8 @@ const tableData = [
     tolSchedule: 'Thu,12/15',
     notes: '',
     leo:'8 - 11PM',
-    wally: '8 - 11PM',
-    david: '8 - 11PM',
+    wally: '8-11PM',
+    david: '8-11PM',
     chris: 'OFF',
     corey: '5:30-10:30PM',
     annie: '',
@@ -122,9 +122,9 @@ const tableData = [
     tolSchedule: 'Fri,12/16',
     notes: '',
     leo:'8 - 11PM',
-    wally: '8 - 11PM',
-    david: '8 - 11PM',
-    chris: '12 - 4PM',
+    wally: '8-11PM',
+    david: '8- 11PM',
+    chris: '12-4PM',
     corey: '5:30-10:30PM',
     annie: '',
     caroline: '6-10:30PM',
@@ -138,8 +138,8 @@ const tableData = [
     leo:'8 - 11PM',
     wally: '8 - 11PM',
     david: '8 - 11PM',
-    chris: '12 - 4PM',
-    corey: '5:30 - 10:30PM',
+    chris: '12-4PM',
+    corey: '5:30-10:30PM',
     annie: '',
     caroline: '',
     ian: '',
@@ -166,7 +166,7 @@ const tableData = [
     leo:'8 - 11PM',
     wally: '8 - 11PM',
     david: '8 - 11PM',
-    chris: '12 - 4PM',
+    chris: '12-4PM',
     corey: '5:30-10:30PM',
     annie: '',
     caroline: '',
@@ -180,8 +180,8 @@ const tableData = [
     leo:'8 - 11PM',
     wally: '8 - 11PM',
     david: '8 - 11PM',
-    chris: '12 - 4PM',
-    corey: '5:30 - 10:30PM',
+    chris: '12-4PM',
+    corey: '5:30-10:30PM',
     annie: '',
     caroline: '',
     ian: '',
@@ -194,7 +194,7 @@ const tableData = [
     leo:'8 - 11PM',
     wally: '8 - 11PM',
     david: '8 - 11PM',
-    chris: '12 - 4PM',
+    chris: '12-4PM',
     corey: 'OFF',
     annie: '5:30-10:30PM',
     caroline: '',
@@ -206,9 +206,9 @@ const tableData = [
     tolSchedule: 'Thur,12/22',
     notes: 'Very High Vol',
     leo:'8 - 11PM',
-    wally: '8 - 11PM',
-    david: '8 - 11PM',
-    chris: '12 - 4PM',
+    wally: '8-11PM',
+    david: '8-11PM',
+    chris: '12-4PM',
     corey: '5:30-10:30PM',
     annie: '',
     caroline: '',
@@ -267,7 +267,7 @@ export default class ClosingChecklist extends React.Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                {<h2>Schedule</h2>}
+                {<h1>Schedule</h1>}
               </TableHeaderColumn>
             </TableRow>
             
@@ -282,34 +282,28 @@ export default class ClosingChecklist extends React.Component {
           <TableRow style={{textAlign: 'center'}}>
               
               <TableHeaderColumn tooltip="Task"><h3>Schedule</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Notes</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Leo</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Wally</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>David</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Chris</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Corey</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Annie</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Caroline</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Ian</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Instructions"><h3>Ivan</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Jessica</h3></TableHeaderColumn>
+              
+              
               
             </TableRow>
             {tableData.map( (row, index) => (
               <TableRow style={{textAlign: 'center'}} key={index} selected={row.selected}>
                 
                 <TableRowColumn>{row.tolSchedule}</TableRowColumn>
-                <TableRowColumn>{row.notes}</TableRowColumn>
-                <TableRowColumn>{row.leo}</TableRowColumn>
-                <TableRowColumn>{row.wally}</TableRowColumn>
-                <TableRowColumn>{row.david}</TableRowColumn>
                 <TableRowColumn>{row.chris}</TableRowColumn>
                 <TableRowColumn>{row.corey}</TableRowColumn>
                 <TableRowColumn>{row.annie}</TableRowColumn>
                 <TableRowColumn>{row.caroline}</TableRowColumn>
                 <TableRowColumn>{row.ian}</TableRowColumn>
                 <TableRowColumn>{row.ivan}</TableRowColumn>
-                <TableRowColumn>{row.jessica}</TableRowColumn>
+               
+                
               </TableRow>
               ))}
           </TableBody>

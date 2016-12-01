@@ -7,20 +7,20 @@ import Toggle from 'material-ui/Toggle';
 
 const tableData = [
   {
-    task: 'Walter ayala ',
-    instructions: 'Check gas tank and open valve.Lockcode:1620.',
+    task: 'Turn off frier, turn off gas valve, clean frier',
+    instructions: 'Check gas tank and close valve.Lockcode:1620.',
   },
   {
-    task: 'Check oil and turn on fryer',
-    instructions: 'Check if more oil is needed and turn on fryer',
+    task: 'Clean prep area',
+    instructions: 'Clean prep tables, sugar, heatlamps',
   },
   {
-    task: 'Check to do list',
-    instructions: 'Define to do tasks for the day',
+    task: 'Check drink containers',
+    instructions: 'Empty containers',
   },
   {
-    task: 'Start heating drinks',
-    instructions: 'Mexican hot chocolate and cinnamon tea',
+    task: 'Wash dishes and utencils',
+    instructions: 'Churrera, spoons, empty containers',
   }
 ];
 
