@@ -3,7 +3,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
   from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 const tableData = [
   {
@@ -24,6 +24,10 @@ const tableData = [
   }
 ];
 
+const style = {
+  margin: 12,
+};
+
 export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
@@ -37,14 +41,52 @@ export default class ClosingChecklist extends React.Component {
       enableSelectAll: true,
       deselectOnClickaway: false,
       showCheckboxes: true,
-      height: '300px',
+      height: '600px',
+      task:'',
+      data: [
+        {task: 'Turn off frier, turn off gas valve, clean frier'},
+        {task: 'Empty containers'}
+      ],
     };
+    this.createTask = this.createTask.bind(this);
+    this.submitTask = this.submitTask.bind(this);
   }
 
+  createTask(e){
+    this.setState({
+      task: e.target.value
+    });
+  }
+
+  submitTask(e){
+    
+    const nextTask = {
+      task:this.state.task
+    };
+
+    var list = Object.assign([], this.state.data);
+    list.push(nextTask);
+    this.setState({
+      data: list
+    });
+
+  }
 
   render() {
     return (
       <div>
+        
+        <TextField
+          hintText="Create new task"
+          floatingLabelText="New Task"
+          onChange={this.createTask}
+        />
+        <RaisedButton 
+            label="Create" 
+            primary={true} 
+            style={style}
+            onClick={this.submitTask}
+        />
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
@@ -71,13 +113,11 @@ export default class ClosingChecklist extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Task</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Instructions</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
             </TableRow>
-            {tableData.map( (row, index) => (
+            {this.state.data.map( (row, index) => (
               <TableRow key={index} selected={row.selected}>
                 <TableRowColumn>{row.task}</TableRowColumn>
-                <TableRowColumn>{row.instructions}</TableRowColumn>
               </TableRow>
               ))}
 
