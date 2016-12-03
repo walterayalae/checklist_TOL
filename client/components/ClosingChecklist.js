@@ -66,7 +66,7 @@ export default class ClosingChecklist extends React.Component {
     };
     
     
-    firebase.database().ref('info/').push(newTask)
+    firebase.database().ref('info/').push(newTask);
     this.state.info.push(newTask);
     this.setState({
       info: this.state.info
@@ -77,8 +77,8 @@ export default class ClosingChecklist extends React.Component {
 
   render() {
     var tasks = this.state.info.map(function(row){
-                   console.log('mmas', row.task)
-                  return row.task
+                   console.log('mmas', row.task);
+                  return row.task;
     });
     
     var todo = tasks.map((data,index) => {
@@ -132,10 +132,7 @@ export default class ClosingChecklist extends React.Component {
           <TableRow>
               <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
             </TableRow>
-            
                {todo}
-              
-
           </TableBody>
           <TableFooter
             adjustForCheckbox={this.state.showCheckboxes}

@@ -3,28 +3,16 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
   from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
+import RaisedButton from 'material-ui/RaisedButton';
+import firebase from 'firebase';
 
 
-const tableData = [
-  {
-    task: 'Check gas tank',
-    instructions: 'Check gas tank and open valve.Lockcode:1620.',
-  },
-  {
-    task: 'Check oil and turn on fryer',
-    instructions: 'Check if more oil is needed and turn on fryer',
-  },
-  {
-    task: 'Check to do list',
-    instructions: 'Define to do tasks for the day',
-  },
-  {
-    task: 'Start heating drinks',
-    instructions: 'Mexican hot chocolate and cinnamon tea',
-  }
-];
 
-export default class OpeningChecklist extends React.Component {
+const style = {
+  margin: 12,
+};
+
+export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,14 +25,85 @@ export default class OpeningChecklist extends React.Component {
       enableSelectAll: true,
       deselectOnClickaway: false,
       showCheckboxes: true,
-      height: '300px',
+      height: '600px',
+      task:'',
+      list: [],
+      name: ''
     };
+    this.createTask = this.createTask.bind(this);
+    this.submitTask = this.submitTask.bind(this);
   }
 
+  componentWillMount(){
+    
+     firebase.database().ref('list/').once('value', (snap) =>{
+      var todos = [];
+      var that = this;
+      
+      snap.forEach(function(data){
+        todos.push(data.val());
+        that.setState({list: todos});
+      });
+     
+
+    });
+
+  }
+
+  createTask(e){
+    
+    this.setState({
+      task: e.target.value,
+      name: e.target.value
+    });
+
+  }
+   
+  submitTask(e){
+
+    var newTask = {
+      task: this.state.task
+    };
+    
+    
+    firebase.database().ref('list/').push(newTask);
+    this.state.list.push(newTask);
+    this.setState({
+      list: this.state.list
+    });
+    this.state.name = '';
+  }
+    
 
   render() {
+    var tasks = this.state.list.map(function(row){
+                   console.log('mmas', row.task);
+                  return row.task;
+    });
+    
+    var todo = tasks.map((data,index) => {
+            return  <TableRow key={index}>
+                    < TableRowColumn>{data}</TableRowColumn>
+                    </TableRow >
+      })
+              
+    
+
     return (
       <div>
+        
+        <TextField
+          hintText="Create new task"
+          floatingLabelText="New Task"
+          value={this.state.name}
+          onChange={this.createTask}
+        />
+        <RaisedButton 
+            label="Create" 
+            primary={true} 
+            style={style}
+            onClick={this.submitTask}
+        />
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
@@ -59,7 +118,7 @@ export default class OpeningChecklist extends React.Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                {<h2>Opening Checklist</h2>}
+                {<h2>Closing Checklist</h2>}
               </TableHeaderColumn>
             </TableRow>
             
@@ -71,15 +130,9 @@ export default class OpeningChecklist extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Task</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Instructions</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
             </TableRow>
-            {tableData.map( (row, index) => (
-              <TableRow key={index} selected={row.selected}>
-                <TableRowColumn>{row.task}</TableRowColumn>
-                <TableRowColumn>{row.instructions}</TableRowColumn>
-              </TableRow>
-              ))}
+               {todo}
           </TableBody>
           <TableFooter
             adjustForCheckbox={this.state.showCheckboxes}
