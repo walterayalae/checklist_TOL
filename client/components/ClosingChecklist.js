@@ -4,25 +4,9 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
+import firebase from 'firebase';
 
-const tableData = [
-  {
-    task: 'Turn off frier, turn off gas valve, clean frier',
-    instructions: 'Check gas tank and close valve.Lockcode:1620.',
-  },
-  {
-    task: 'Clean prep area',
-    instructions: 'Clean prep tables, sugar, heatlamps',
-  },
-  {
-    task: 'Check drink containers',
-    instructions: 'Empty containers',
-  },
-  {
-    task: 'Wash dishes and utencils',
-    instructions: 'Churrera, spoons, empty containers',
-  }
-];
+
 
 const style = {
   margin: 12,
@@ -43,42 +27,75 @@ export default class ClosingChecklist extends React.Component {
       showCheckboxes: true,
       height: '600px',
       task:'',
-      data: [
-        {task: 'Turn off frier, turn off gas valve, clean frier'},
-        {task: 'Empty containers'}
-      ],
+      info: [],
+      name: ''
     };
     this.createTask = this.createTask.bind(this);
     this.submitTask = this.submitTask.bind(this);
   }
 
-  createTask(e){
-    this.setState({
-      task: e.target.value
-    });
-  }
-
-  submitTask(e){
+  componentWillMount(){
     
-    const nextTask = {
-      task:this.state.task
-    };
+     firebase.database().ref('info/').once('value', (snap) =>{
+      var todos = [];
+      var that = this;
+      
+      snap.forEach(function(data){
+        todos.push(data.val());
+        that.setState({info: todos});
+      });
+     
 
-    var list = Object.assign([], this.state.data);
-    list.push(nextTask);
-    this.setState({
-      data: list
     });
 
   }
+
+  createTask(e){
+    
+    this.setState({
+      task: e.target.value,
+      name: e.target.value
+    });
+
+  }
+   
+  submitTask(e){
+
+    var newTask = {
+      task: this.state.task
+    };
+    
+    
+    firebase.database().ref('info/').push(newTask)
+    this.state.info.push(newTask);
+    this.setState({
+      info: this.state.info
+    });
+    this.state.name = '';
+  }
+    
 
   render() {
+    var tasks = this.state.info.map(function(row){
+                   console.log('mmas', row.task)
+                  return row.task
+    });
+    
+    var todo = tasks.map((data,index) => {
+            return  <TableRow key={index}>
+                    < TableRowColumn>{data}</TableRowColumn>
+                    </TableRow >
+      })
+              
+    
+
     return (
       <div>
         
         <TextField
           hintText="Create new task"
           floatingLabelText="New Task"
+          value={this.state.name}
           onChange={this.createTask}
         />
         <RaisedButton 
@@ -115,11 +132,9 @@ export default class ClosingChecklist extends React.Component {
           <TableRow>
               <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
             </TableRow>
-            {this.state.data.map( (row, index) => (
-              <TableRow key={index} selected={row.selected}>
-                <TableRowColumn>{row.task}</TableRowColumn>
-              </TableRow>
-              ))}
+            
+               {todo}
+              
 
           </TableBody>
           <TableFooter

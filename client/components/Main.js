@@ -28,7 +28,7 @@ export default class Main extends React.Component {
         <h1>Churro Co Austin</h1>
         <h2>Trail of Lights 2016</h2>
         <MuiThemeProvider muiTheme={muiTheme}>
-        <div>< Navigation /></div>
+        < Navigation />
         </MuiThemeProvider>
       </div>
     );
