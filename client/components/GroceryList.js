@@ -100,21 +100,23 @@ export default class GroceryList extends React.Component {
 
     return (
       <div>
-        
+
+        <div style={{textAlign:'center'}}>
+        {<h2 >Grocery List</h2>}
         <TextField
           hintText="Add item"
           floatingLabelText="New Item"
           value={this.state.name}
           onChange={this.createTask}
-          style={{marginBottom: '50px'}}
+          
         />
         <RaisedButton 
             label="Add item" 
-            primary={true} 
+            secondary={true} 
             style={style}
             onClick={this.submitTask}
         />
-        
+        </div>
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
@@ -130,8 +132,8 @@ export default class GroceryList extends React.Component {
           >
             <TableRow>
             
-              <TableHeaderColumn colSpan="3" tooltip="Task" style={{textAlign: 'center'}}>
-                {<h2>Grocery List</h2>}
+              <TableHeaderColumn colSpan="3" tooltip="Groceries" style={{textAlign: 'center'}}>
+                
               </TableHeaderColumn>
             </TableRow>
             
@@ -143,7 +145,7 @@ export default class GroceryList extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Groceries</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Item"><h3>Groceries</h3></TableHeaderColumn>
             </TableRow>
                {todo}
           </TableBody>
@@ -153,7 +155,7 @@ export default class GroceryList extends React.Component {
             </TableFooter>
         </Table>
         <RaisedButton 
-            label='Reset'
+            label='delete list'
             primary={true} 
             style={style}
             onClick={this.resetDb}

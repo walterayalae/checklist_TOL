@@ -11,16 +11,17 @@ import {
   grey300,
   lightBlack,
   purpleA200,
-  white
+  white,
+  red200
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 
 const defaultTheme = {
-  
+
   palette: {
     
     primary1Color: blue500,
-    primary2Color: blueGrey500,
+    primary2Color: red200,
     primary3Color: lightBlack,
     accent1Color: blue700,
     accent2Color: blueGrey100,
