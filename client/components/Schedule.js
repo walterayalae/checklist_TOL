@@ -244,7 +244,7 @@ export default class ClosingChecklist extends React.Component {
       multiSelectable: true,
       enableSelectAll: true,
       deselectOnClickaway: false,
-      showCheckboxes: true,
+      showCheckboxes: false,
       height: '600px',
     };
   }
@@ -282,12 +282,12 @@ export default class ClosingChecklist extends React.Component {
           <TableRow style={{textAlign: 'center'}}>
               
               <TableHeaderColumn tooltip="Task"><h3>Schedule</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Chris</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Corey</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Annie</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Caroline</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Ian</h3></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Instructions"><h3>Ivan</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Chris"><h3>Chris</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Corey"><h3>Corey</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Annie"><h3>Annie</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Caroline"><h3>Caroline</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Ian"><h3>Ian</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Ivan"><h3>Ivan</h3></TableHeaderColumn>
               
               
               

@@ -74,6 +74,7 @@ export default class ClosingChecklist extends React.Component {
     this.state.name = '';
   }
     
+  
 
   render() {
     var tasks = this.state.list.map(function(row){

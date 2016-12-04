@@ -7,11 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import firebase from 'firebase';
 
 
-
-const style = {
-  margin: 12,
-};
-
 export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +27,8 @@ export default class ClosingChecklist extends React.Component {
     };
     this.createTask = this.createTask.bind(this);
     this.submitTask = this.submitTask.bind(this);
+    this.resetDb = this.resetDb.bind(this);
+    
   }
 
   componentWillMount(){
@@ -73,11 +70,18 @@ export default class ClosingChecklist extends React.Component {
     });
     this.state.name = '';
   }
-    
+  
+  resetDb(){
+    var reset = firebase.database().ref('info/');
+    reset.remove();
+    this.setState({
+      info: []
+    });
+  }
 
   render() {
     var tasks = this.state.info.map(function(row){
-                   console.log('mmas', row.task);
+                
                   return row.task;
     });
     
@@ -86,8 +90,13 @@ export default class ClosingChecklist extends React.Component {
                     < TableRowColumn>{data}</TableRowColumn>
                     </TableRow >
       })
+
+    var style = {
+      margin: 12,
+
+      };
               
-    
+   
 
     return (
       <div>
@@ -97,6 +106,7 @@ export default class ClosingChecklist extends React.Component {
           floatingLabelText="New Task"
           value={this.state.name}
           onChange={this.createTask}
+          style={{marginBottom: '50px'}}
         />
         <RaisedButton 
             label="Create" 
@@ -104,12 +114,14 @@ export default class ClosingChecklist extends React.Component {
             style={style}
             onClick={this.submitTask}
         />
+        
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
           fixedFooter={this.state.fixedFooter}
           selectable={this.state.selectable}
           multiSelectable={this.state.multiSelectable}
+          onRowSelection={this.onRowSelection}
         >
           <TableHeader
             displaySelectAll={this.state.showCheckboxes}
@@ -117,7 +129,9 @@ export default class ClosingChecklist extends React.Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+            
+              <TableHeaderColumn colSpan="3" tooltip="Task" style={{textAlign: 'center'}}>
+                {<h3 style={{textAlign: 'left'}}>Select all</h3>}
                 {<h2>Closing Checklist</h2>}
               </TableHeaderColumn>
             </TableRow>
@@ -139,6 +153,12 @@ export default class ClosingChecklist extends React.Component {
           >
             </TableFooter>
         </Table>
+        <RaisedButton 
+            label='Reset'
+            primary={true} 
+            style={style}
+            onClick={this.resetDb}
+        />
       </div>
     );
   }

@@ -22,11 +22,36 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
   }
+
+
   render() {
+     var time = function(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+
+          if(dd<10) {
+            dd='0'+dd
+              } 
+
+          if(mm<10) {
+            mm='0'+mm
+              } 
+
+          today = mm+'/'+dd+'/'+yyyy;
+
+          return today;
+    };
+
     return (
       <div className="my-component">
+      <img src='http://churrocoaustin.com/wp-content/uploads/2014/12/ChurrCoLogoSalmon144x144.png'  />
+      <div style={{textAlign:'center', display:'inline-block'}}>
         <h1>Churro Co Austin</h1>
         <h2>Trail of Lights 2016</h2>
+        <h3>{time()}</h3>
+      </div>
         <MuiThemeProvider muiTheme={muiTheme}>
         < Navigation />
         </MuiThemeProvider>
