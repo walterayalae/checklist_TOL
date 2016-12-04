@@ -6,6 +6,7 @@ import ClosingChecklist from './ClosingChecklist';
 import OpeningChecklist from './OpeningChecklist';
 import Schedule from './Schedule';
 import EmergencyNumbers from './EmergencyNumbers';
+import GroceryList from './GroceryList';
 
 
 export default class Navigation extends React.Component {
@@ -16,12 +17,14 @@ export default class Navigation extends React.Component {
       showComponent: false,
       showOpening: false,
       showScedule: true,
-      showContact: false
+      showContact: false,
+      showGrocery: false
     };
     this._onButtonClick = this._onButtonClick.bind(this);
     this.openingClick = this.openingClick.bind(this);
     this.scheduleClick= this.scheduleClick.bind(this);
     this.contactClick = this.contactClick.bind(this);
+    this.groceryClick = this.groceryClick.bind(this);
   }
 
 _onButtonClick() {
@@ -29,7 +32,8 @@ _onButtonClick() {
     showComponent: true,
     showOpening: false,
     showScedule: false,
-    showContact: false
+    showContact: false,
+    showGrocery: false
   });
 }
 
@@ -38,7 +42,8 @@ openingClick() {
     showOpening: true,
     showComponent: false,
     showScedule:false,
-    showContact:false
+    showContact:false,
+    showGrocery: false
   });
 }
 
@@ -47,7 +52,8 @@ scheduleClick() {
     showOpening: false,
     showComponent: false,
     showScedule: true,
-    showContact: false
+    showContact: false,
+    showGrocery: false
   });
 }
 
@@ -56,10 +62,23 @@ contactClick() {
     showOpening: false,
     showComponent: false,
     showScedule: false,
-    showContact: true
+    showContact: true,
+    showGrocery: false
+  });
+}
+
+groceryClick(){
+  this.setState({
+    showOpening: false,
+    showComponent: false,
+    showScedule: false,
+    showContact: false,
+    showGrocery: true
   });
 
 }
+
+
 
   render() {
     return (
@@ -70,7 +89,8 @@ contactClick() {
             <MenuItem value={1} primaryText="Schedule" onClick={this.scheduleClick} />
             <MenuItem value={2} primaryText="Opening Checklist" onClick={this.openingClick} />
             <MenuItem value={3} primaryText="Closing Checklist" onClick={this._onButtonClick} />
-            <MenuItem value={4} primaryText="Emergency Numbers" onClick={this.contactClick}/>
+            <MenuItem value={4} primaryText="Grocery List" onClick={this.groceryClick}/>
+            <MenuItem value={5} primaryText="Emergency Numbers" onClick={this.contactClick}/>
           </DropDownMenu>
         </ToolbarGroup>
         </Toolbar>
@@ -86,11 +106,15 @@ contactClick() {
               <Schedule /> :
               null
             }
+        {this.state.showGrocery ?
+              <GroceryList /> :
+              null
+            }
         {this.state.showContact ?
               <EmergencyNumbers /> :
               null
             }
-
+        
       </div>
     );
   }

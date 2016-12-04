@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import firebase from 'firebase';
 
 
-export default class ClosingChecklist extends React.Component {
+export default class GroceryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,10 +19,10 @@ export default class ClosingChecklist extends React.Component {
       multiSelectable: true,
       enableSelectAll: true,
       deselectOnClickaway: false,
-      showCheckboxes: true,
+      showCheckboxes: false,
       height: '600px',
       task:'',
-      info: [],
+      grocery: [],
       name: ''
     };
     this.createTask = this.createTask.bind(this);
@@ -33,13 +33,13 @@ export default class ClosingChecklist extends React.Component {
 
   componentWillMount(){
     
-     firebase.database().ref('info/').once('value', (snap) =>{
+     firebase.database().ref('grocery/').once('value', (snap) =>{
       var todos = [];
       var that = this;
       
       snap.forEach(function(data){
         todos.push(data.val());
-        that.setState({info: todos});
+        that.setState({grocery: todos});
       });
      
 
@@ -63,24 +63,24 @@ export default class ClosingChecklist extends React.Component {
     };
     
     
-    firebase.database().ref('info/').push(newTask);
-    this.state.info.push(newTask);
+    firebase.database().ref('grocery/').push(newTask);
+    this.state.grocery.push(newTask);
     this.setState({
-      info: this.state.info
+      info: this.state.grocery
     });
     this.state.name = '';
   }
   
   resetDb(){
-    var reset = firebase.database().ref('info/');
+    var reset = firebase.database().ref('grocery/');
     reset.remove();
     this.setState({
-      info: []
+      grocery: []
     });
   }
 
   render() {
-    var tasks = this.state.info.map(function(row){
+    var tasks = this.state.grocery.map(function(row){
                 
                   return row.task;
     });
@@ -102,14 +102,14 @@ export default class ClosingChecklist extends React.Component {
       <div>
         
         <TextField
-          hintText="Create new task"
-          floatingLabelText="New Task"
+          hintText="Add item"
+          floatingLabelText="New Item"
           value={this.state.name}
           onChange={this.createTask}
           style={{marginBottom: '50px'}}
         />
         <RaisedButton 
-            label="Add task" 
+            label="Add item" 
             primary={true} 
             style={style}
             onClick={this.submitTask}
@@ -131,8 +131,7 @@ export default class ClosingChecklist extends React.Component {
             <TableRow>
             
               <TableHeaderColumn colSpan="3" tooltip="Task" style={{textAlign: 'center'}}>
-                {<h3 style={{textAlign: 'left'}}>Select all</h3>}
-                {<h2>Closing Checklist</h2>}
+                {<h2>Grocery List</h2>}
               </TableHeaderColumn>
             </TableRow>
             
@@ -144,7 +143,7 @@ export default class ClosingChecklist extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h3>Groceries</h3></TableHeaderColumn>
             </TableRow>
                {todo}
           </TableBody>

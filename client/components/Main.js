@@ -2,16 +2,35 @@ import React from 'react';
 import Navigation from './Navigation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+  blue500,
+  blue700,
+  blueGrey100,
+  blueGrey500,
+  darkBlack,
+  grey300,
+  lightBlack,
+  purpleA200,
+  white
+} from 'material-ui/styles/colors';
+import {fade} from 'material-ui/utils/colorManipulator';
 
 const defaultTheme = {
+  
   palette: {
-    primary1Color: '#1976D2', // primary buttons and appbars
-    primary2Color: '#1976D2',
-    primary3Color: '#BBDEFB',
-    accent1Color: '#009688', // secondary buttons and slider indicators
-    accent2Color: '#00796B', // toolbars, table highlight color
-    borderColor: '#BDBDBD', // dividers
-    shadowColor: '#000000', // hover shadows
+    
+    primary1Color: blue500,
+    primary2Color: blueGrey500,
+    primary3Color: lightBlack,
+    accent1Color: blue700,
+    accent2Color: blueGrey100,
+    accent3Color: blueGrey500,
+    textColor: darkBlack,
+    alternateTextColor: white,
+    canvasColor: white,
+    borderColor: grey300,
+    disabledColor: fade( darkBlack, 0.3 ),
+    pickerHeaderColor: blue500,
   },
 };
 

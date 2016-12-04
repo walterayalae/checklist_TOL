@@ -32,6 +32,7 @@ export default class ClosingChecklist extends React.Component {
     };
     this.createTask = this.createTask.bind(this);
     this.submitTask = this.submitTask.bind(this);
+    this.resetDb = this.resetDb.bind(this);
   }
 
   componentWillMount(){
@@ -74,7 +75,13 @@ export default class ClosingChecklist extends React.Component {
     this.state.name = '';
   }
     
-  
+  resetDb(){
+    var reset = firebase.database().ref('list/');
+    reset.remove();
+    this.setState({
+      list: []
+    });
+  }
 
   render() {
     var tasks = this.state.list.map(function(row){
@@ -100,7 +107,7 @@ export default class ClosingChecklist extends React.Component {
           onChange={this.createTask}
         />
         <RaisedButton 
-            label="Create" 
+            label="add task" 
             primary={true} 
             style={style}
             onClick={this.submitTask}
@@ -140,6 +147,12 @@ export default class ClosingChecklist extends React.Component {
           >
             </TableFooter>
         </Table>
+         <RaisedButton 
+            label='Reset'
+            secondary={true} 
+            style={style}
+            onClick={this.resetDb}
+    />
       </div>
     );
   }
