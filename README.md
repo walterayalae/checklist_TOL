@@ -2,7 +2,7 @@
 Checklist
 
 
-Application to organize opening and closing procedures as well as employee schedules 
+Application to organize opening and closing procedures, employee schedules and inventory
 for Christmas event (Trail of Lights 2016). 
 
 Built with:
@@ -11,5 +11,4 @@ Built with:
 - Node
 - React
 - Material-UI
-- MongoDB
-- Mongoose
+- Firebase
