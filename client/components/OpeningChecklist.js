@@ -8,9 +8,6 @@ import firebase from 'firebase';
 
 
 
-const style = {
-  margin: 12,
-};
 
 export default class ClosingChecklist extends React.Component {
   constructor(props) {
@@ -38,8 +35,8 @@ export default class ClosingChecklist extends React.Component {
   componentWillMount(){
     
      firebase.database().ref('list/').once('value', (snap) =>{
-      var todos = [];
-      var that = this;
+      const todos = [];
+      const that = this;
       
       snap.forEach(function(data){
         todos.push(data.val());
@@ -62,21 +59,25 @@ export default class ClosingChecklist extends React.Component {
    
   submitTask(e){
 
-    var newTask = {
+    const newTask = {
       task: this.state.task
     };
     
-    
+    if(this.state.task === ''){
+      alert('Add new task');
+    }else{
     firebase.database().ref('list/').push(newTask);
     this.state.list.push(newTask);
     this.setState({
       list: this.state.list
     });
     this.state.name = '';
+    this.state.task = '';
+  }
   }
     
   resetDb(){
-    var reset = firebase.database().ref('list/');
+    const reset = firebase.database().ref('list/');
     reset.remove();
     this.setState({
       list: []
@@ -84,18 +85,20 @@ export default class ClosingChecklist extends React.Component {
   }
 
   render() {
-    var tasks = this.state.list.map(function(row){
-                   console.log('mmas', row.task);
+    const tasks = this.state.list.map(function(row){
+                  
                   return row.task;
     });
     
-    var todo = tasks.map((data,index) => {
+    const todo = tasks.map((data,index) => {
             return  <TableRow key={index}>
                     < TableRowColumn>{data}</TableRowColumn>
                     </TableRow >
       })
               
-    
+    const style = {
+     margin: 12,
+      };
 
     return (
       <div>
@@ -105,6 +108,7 @@ export default class ClosingChecklist extends React.Component {
           floatingLabelText="New Task"
           value={this.state.name}
           onChange={this.createTask}
+          style={{marginBottom: '50px'}}
         />
         <RaisedButton 
             label="add task" 
@@ -126,7 +130,8 @@ export default class ClosingChecklist extends React.Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                {<h2>Closing Checklist</h2>}
+              {<h3 style={{textAlign: 'left'}}>Select all</h3>}
+                {<h2>Opening Checklist</h2>}
               </TableHeaderColumn>
             </TableRow>
             

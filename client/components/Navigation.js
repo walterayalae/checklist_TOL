@@ -25,6 +25,7 @@ export default class Navigation extends React.Component {
     this.scheduleClick= this.scheduleClick.bind(this);
     this.contactClick = this.contactClick.bind(this);
     this.groceryClick = this.groceryClick.bind(this);
+    this.navOptions = this.navOptions.bind(this);
   }
 
 _onButtonClick() {
@@ -78,14 +79,19 @@ groceryClick(){
 
 }
 
+navOptions(event, index, value){
+  this.setState({ value });
+
+}
+
 
 
   render() {
     return (
       <div>
      <Toolbar >
-        <ToolbarGroup firstChild={false}>
-          <DropDownMenu value={this.state.value} onChange={(event, index, value) => this.setState({value})}>
+        <ToolbarGroup firstChild={true}>
+          <DropDownMenu value={this.state.value} onChange={this.navOptions}>
             <MenuItem value={1} primaryText="Schedule" onClick={this.scheduleClick} />
             <MenuItem value={2} primaryText="Opening Checklist" onClick={this.openingClick} />
             <MenuItem value={3} primaryText="Closing Checklist" onClick={this._onButtonClick} />

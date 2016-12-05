@@ -39,17 +39,13 @@ const defaultTheme = {
 const muiTheme = getMuiTheme(defaultTheme);
 
 export default class Main extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-
+  
   render() {
-     var time = function(){
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
+     const time = function(){
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1;
+        let yyyy = today.getFullYear();
 
           if(dd<10) {
             dd='0'+dd
@@ -63,9 +59,9 @@ export default class Main extends React.Component {
 
           return today;
     };
-
+     
     return (
-      <div className="my-component">
+      <div >
       <img src='http://churrocoaustin.com/wp-content/uploads/2014/12/ChurrCoLogoSalmon144x144.png'  />
       <div style={{textAlign:'center', display:'inline-block'}}>
         <h1>Churro Co Austin</h1>

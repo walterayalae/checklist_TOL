@@ -1,30 +1,31 @@
-var browserify = require('browserify-middleware');
-var express = require('express');
-var Path = require('path');
+const browserify = require('browserify-middleware');
+const express = require('express');
+const Path = require('path');
 
-var routes = express.Router()
+
+const routes = express.Router();
 
 //
 // Provide a browserified file at a specified path
 //
+
 routes.get('/app-bundle.js',
-  browserify('./client/app.js', {
-    // Bundles all client-side es6, JSX, and CSS/SCSS/SASS
-    transform: ['babelify', 'scssify'],
+ browserify('./client/app.js', {
+    transform: [ [ require('babelify'), { presets: ["es2015", "react"] } ] ]
   })
-)
+);
 
 //
 // Example endpoint (also tested in test/server/index_test.js)
 //
 routes.get('/api/tags-example', function(req, res) {
-  res.send(['node', 'express', 'browserify', 'mithril'])
-})
+  res.send(['node', 'express', 'browserify', 'mithril']);
+});
 
 //
 // Static assets (html, etc.)
 //
-var assetFolder = Path.resolve(__dirname, '../client/public')
+const assetFolder = Path.resolve(__dirname, '../client/public');
 routes.use(express.static(assetFolder))
 
 
@@ -60,7 +61,7 @@ if (process.env.NODE_ENV !== 'test') {
   app.use('/', routes);
 
   // Start the server!
-  var port = process.env.PORT || 4000
+  var port = process.env.PORT || 4000;
   app.listen(port);
   console.log("Listening on port", port);
 }

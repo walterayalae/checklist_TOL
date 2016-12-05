@@ -236,10 +236,6 @@ export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fixedHeader: true,
-      fixedFooter: true,
-      stripedRows: false,
-      showRowHover: false,
       selectable: true,
       multiSelectable: true,
       enableSelectAll: true,
@@ -255,8 +251,7 @@ export default class ClosingChecklist extends React.Component {
       <div>
         <Table
           height={this.state.height}
-          fixedHeader={this.state.fixedHeader}
-          fixedFooter={this.state.fixedFooter}
+          
           selectable={this.state.selectable}
           multiSelectable={this.state.multiSelectable}
         >
@@ -266,7 +261,7 @@ export default class ClosingChecklist extends React.Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="3" tooltip="Schedule" style={{textAlign: 'center'}}>
                 {<h1>Schedule</h1>}
               </TableHeaderColumn>
             </TableRow>
@@ -276,12 +271,10 @@ export default class ClosingChecklist extends React.Component {
             style={{textAlign: 'center'}}
             displayRowCheckbox={this.state.showCheckboxes}
             deselectOnClickaway={this.state.deselectOnClickaway}
-            showRowHover={this.state.showRowHover}
-            stripedRows={this.state.stripedRows}
           >
           <TableRow style={{textAlign: 'center'}}>
               
-              <TableHeaderColumn tooltip="Task"><h3>Schedule</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Schedule"><h3>Schedule</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Chris"><h3>Chris</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Corey"><h3>Corey</h3></TableHeaderColumn>
               <TableHeaderColumn tooltip="Annie"><h3>Annie</h3></TableHeaderColumn>

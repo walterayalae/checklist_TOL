@@ -34,8 +34,8 @@ export default class ClosingChecklist extends React.Component {
   componentWillMount(){
     
      firebase.database().ref('info/').once('value', (snap) =>{
-      var todos = [];
-      var that = this;
+      const todos = [];
+      const that = this;
       
       snap.forEach(function(data){
         todos.push(data.val());
@@ -58,21 +58,25 @@ export default class ClosingChecklist extends React.Component {
    
   submitTask(e){
 
-    var newTask = {
+    const newTask = {
       task: this.state.task
     };
     
-    
+    if(this.state.task === ''){
+      alert('Add new task');
+    }else{
     firebase.database().ref('info/').push(newTask);
     this.state.info.push(newTask);
     this.setState({
       info: this.state.info
     });
     this.state.name = '';
+    this.state.task = '';
+  }
   }
   
   resetDb(){
-    var reset = firebase.database().ref('info/');
+    const reset = firebase.database().ref('info/');
     reset.remove();
     this.setState({
       info: []
@@ -80,18 +84,18 @@ export default class ClosingChecklist extends React.Component {
   }
 
   render() {
-    var tasks = this.state.info.map(function(row){
+    const tasks = this.state.info.map(function(row){
                 
                   return row.task;
     });
     
-    var todo = tasks.map((data,index) => {
+    const todo = tasks.map((data,index) => {
             return  <TableRow key={index}>
                     < TableRowColumn>{data}</TableRowColumn>
                     </TableRow >
       })
 
-    var style = {
+    const style = {
       margin: 12,
 
       };

@@ -10,10 +10,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 export default class EmergencyNumbers extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+ 
 
   render() {
     return (
