@@ -7,8 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import firebase from 'firebase';
 
 
-
-
 export default class ClosingChecklist extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +32,7 @@ export default class ClosingChecklist extends React.Component {
 
   componentWillMount(){
     
-     firebase.database().ref('list/').once('value', (snap) =>{
+     firebase.database().ref('list/').on('value', (snap) =>{
       const todos = [];
       const that = this;
       
@@ -42,10 +40,7 @@ export default class ClosingChecklist extends React.Component {
         todos.push(data.val());
         that.setState({list: todos});
       });
-     
-
     });
-
   }
 
   createTask(e){
@@ -54,7 +49,6 @@ export default class ClosingChecklist extends React.Component {
       task: e.target.value,
       name: e.target.value
     });
-
   }
    
   submitTask(e){
@@ -73,7 +67,7 @@ export default class ClosingChecklist extends React.Component {
     });
     this.state.name = '';
     this.state.task = '';
-  }
+   }
   }
     
   resetDb(){
@@ -88,13 +82,13 @@ export default class ClosingChecklist extends React.Component {
     const tasks = this.state.list.map(function(row){
                   
                   return row.task;
-    });
+                  });
     
     const todo = tasks.map((data,index) => {
-            return  <TableRow key={index}>
-                    < TableRowColumn>{data}</TableRowColumn>
-                    </TableRow >
-      })
+                  return  (<TableRow key={index}>
+                           < TableRowColumn><h2>{data}</h2></TableRowColumn>
+                          </TableRow >)
+                  })
               
     const style = {
      margin: 12,
@@ -131,7 +125,7 @@ export default class ClosingChecklist extends React.Component {
             <TableRow>
               <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
               {<h3 style={{textAlign: 'left'}}>Select all</h3>}
-                {<h2>Opening Checklist</h2>}
+                {<h1>Opening Checklist</h1>}
               </TableHeaderColumn>
             </TableRow>
             
@@ -143,14 +137,14 @@ export default class ClosingChecklist extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h2>Tasks</h2></TableHeaderColumn>
             </TableRow>
                {todo}
           </TableBody>
           <TableFooter
             adjustForCheckbox={this.state.showCheckboxes}
           >
-            </TableFooter>
+          </TableFooter>
         </Table>
          <RaisedButton 
             label='Reset'

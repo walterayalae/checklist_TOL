@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import Main from './components/Main';
 import firebase from 'firebase';
 
-
+injectTapEventPlugin();
 
 const config = {
  apiKey: "AIzaSyAW2xBguGGUddUrrkjjuQwgPOIRjbqEuC0",
@@ -16,6 +16,6 @@ const config = {
 
 firebase.initializeApp(config);
 
-injectTapEventPlugin();
+
 
 ReactDOM.render(< Main />, document.getElementById('app'));

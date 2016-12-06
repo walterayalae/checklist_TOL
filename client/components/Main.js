@@ -16,7 +16,12 @@ import {
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 
-const defaultTheme = {
+
+
+export default class Main extends React.Component {
+  
+  render() {
+    const defaultTheme = {
 
   palette: {
     
@@ -36,12 +41,9 @@ const defaultTheme = {
 };
 
 
-const muiTheme = getMuiTheme(defaultTheme);
+   const muiTheme = getMuiTheme(defaultTheme);
 
-export default class Main extends React.Component {
-  
-  render() {
-     const time = function(){
+      const time = function(){
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth()+1;
@@ -60,8 +62,9 @@ export default class Main extends React.Component {
           return today;
     };
      
+     
     return (
-      <div >
+      <div>
       <img src='http://churrocoaustin.com/wp-content/uploads/2014/12/ChurrCoLogoSalmon144x144.png'  />
       <div style={{textAlign:'center', display:'inline-block'}}>
         <h1>Churro Co Austin</h1>

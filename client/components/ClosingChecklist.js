@@ -33,7 +33,7 @@ export default class ClosingChecklist extends React.Component {
 
   componentWillMount(){
     
-     firebase.database().ref('info/').once('value', (snap) =>{
+     firebase.database().ref('info/').on('value', (snap) =>{
       const todos = [];
       const that = this;
       
@@ -41,10 +41,7 @@ export default class ClosingChecklist extends React.Component {
         todos.push(data.val());
         that.setState({info: todos});
       });
-     
-
     });
-
   }
 
   createTask(e){
@@ -53,7 +50,6 @@ export default class ClosingChecklist extends React.Component {
       task: e.target.value,
       name: e.target.value
     });
-
   }
    
   submitTask(e){
@@ -90,9 +86,9 @@ export default class ClosingChecklist extends React.Component {
     });
     
     const todo = tasks.map((data,index) => {
-            return  <TableRow key={index}>
-                    < TableRowColumn>{data}</TableRowColumn>
-                    </TableRow >
+            return  (<TableRow key={index}>
+                    < TableRowColumn><h2>{data}</h2></TableRowColumn>
+                    </TableRow >)
       })
 
     const style = {
@@ -136,7 +132,7 @@ export default class ClosingChecklist extends React.Component {
             
               <TableHeaderColumn colSpan="3" tooltip="Task" style={{textAlign: 'center'}}>
                 {<h3 style={{textAlign: 'left'}}>Select all</h3>}
-                {<h2>Closing Checklist</h2>}
+                {<h1>Closing Checklist</h1>}
               </TableHeaderColumn>
             </TableRow>
             
@@ -148,7 +144,7 @@ export default class ClosingChecklist extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Task"><h3>Tasks</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Task"><h2>Tasks</h2></TableHeaderColumn>
             </TableRow>
                {todo}
           </TableBody>

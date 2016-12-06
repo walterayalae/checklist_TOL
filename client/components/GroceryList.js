@@ -34,17 +34,14 @@ export default class GroceryList extends React.Component {
   componentWillMount(){
     
      firebase.database().ref('grocery/').once('value', (snap) =>{
-      var todos = [];
-      var that = this;
+      const todos = [];
+      const that = this;
       
       snap.forEach(function(data){
         todos.push(data.val());
         that.setState({grocery: todos});
       });
-     
-
     });
-
   }
 
   createTask(e){
@@ -53,26 +50,29 @@ export default class GroceryList extends React.Component {
       task: e.target.value,
       name: e.target.value
     });
-
   }
    
   submitTask(e){
 
-    var newTask = {
+    const newTask = {
       task: this.state.task
     };
     
-    
+    if(this.state.task === ''){
+      alert('Add new item to your list');
+    }else{
     firebase.database().ref('grocery/').push(newTask);
     this.state.grocery.push(newTask);
     this.setState({
       info: this.state.grocery
     });
     this.state.name = '';
+    this.state.task = '';
+    }
   }
   
   resetDb(){
-    var reset = firebase.database().ref('grocery/');
+    const reset = firebase.database().ref('grocery/');
     reset.remove();
     this.setState({
       grocery: []
@@ -80,20 +80,19 @@ export default class GroceryList extends React.Component {
   }
 
   render() {
-    var tasks = this.state.grocery.map(function(row){
+    const tasks = this.state.grocery.map(function(row){
                 
                   return row.task;
     });
     
-    var todo = tasks.map((data,index) => {
-            return  <TableRow key={index}>
-                    < TableRowColumn>{data}</TableRowColumn>
-                    </TableRow >
+    const todo = tasks.map((data,index) => {
+            return  (<TableRow key={index}>
+                    < TableRowColumn><h2>{data}</h2></TableRowColumn>
+                    </TableRow >)
       })
 
-    var style = {
+    const style = {
       margin: 12,
-
       };
               
    
@@ -102,16 +101,16 @@ export default class GroceryList extends React.Component {
       <div>
 
         <div style={{textAlign:'center'}}>
-        {<h2 >Grocery List</h2>}
+        {<h1 >To Do List</h1>}
         <TextField
           hintText="Add item"
-          floatingLabelText="New Item"
+          floatingLabelText="New to do"
           value={this.state.name}
           onChange={this.createTask}
           
         />
         <RaisedButton 
-            label="Add item" 
+            label="Add " 
             secondary={true} 
             style={style}
             onClick={this.submitTask}
@@ -132,7 +131,7 @@ export default class GroceryList extends React.Component {
           >
             <TableRow>
             
-              <TableHeaderColumn colSpan="3" tooltip="Groceries" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="3" tooltip="Just do it" style={{textAlign: 'center'}}>
                 
               </TableHeaderColumn>
             </TableRow>
@@ -145,7 +144,7 @@ export default class GroceryList extends React.Component {
             stripedRows={this.state.stripedRows}
           >
           <TableRow>
-              <TableHeaderColumn tooltip="Item"><h3>Groceries</h3></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Item"><h2>Things to do</h2></TableHeaderColumn>
             </TableRow>
                {todo}
           </TableBody>

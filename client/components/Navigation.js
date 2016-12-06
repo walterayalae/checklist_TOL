@@ -93,9 +93,9 @@ navOptions(event, index, value){
         <ToolbarGroup firstChild={true}>
           <DropDownMenu value={this.state.value} onChange={this.navOptions}>
             <MenuItem value={1} primaryText="Schedule" onClick={this.scheduleClick} />
-            <MenuItem value={2} primaryText="Opening Checklist" onClick={this.openingClick} />
-            <MenuItem value={3} primaryText="Closing Checklist" onClick={this._onButtonClick} />
-            <MenuItem value={4} primaryText="Grocery List" onClick={this.groceryClick}/>
+            <MenuItem value={2} primaryText="To Do List" onClick={this.groceryClick}/>
+            <MenuItem value={3} primaryText="Opening Checklist" onClick={this.openingClick} />
+            <MenuItem value={4} primaryText="Closing Checklist" onClick={this._onButtonClick} />
             <MenuItem value={5} primaryText="Emergency Numbers" onClick={this.contactClick}/>
           </DropDownMenu>
         </ToolbarGroup>

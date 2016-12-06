@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "nodemon server/ --ignore client/",
+    "build": "browserify -t [ babelify --presets [ react ] ] client/app.js -o client/public/app-bundle.js",
     "test_client": "./scripts/test_client.sh",
     "test_server": "./scripts/test_server.sh",
     "test": "./scripts/test_client.sh && ./scripts/test_server.sh"
